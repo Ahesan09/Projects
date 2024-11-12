@@ -1,0 +1,205 @@
+{% extends "base.html" %}
+
+{% block title %}Lung Cancer{% endblock title %}
+
+{% block body %}
+
+<div class="container">
+    <h1 class="text-center mt-2 mb-4">Lung Cancer Prediction</h1>
+
+    {% if outcome %}
+        <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-danger rounded box-shadow">
+            <div class="lh-100 my-2">
+                <h5 class="mb-0 text-white lh-100">Your prediction report: <b> {{ outcome }} </b></h5>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="my-3">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="d-block w-100 bg-dark" style="height: 300px;"></div>
+                    <div class="carousel-caption d-none d-md-block bg-dark text-light" style="padding-top: 0;">
+                        <h1 style="margin-top: 0;" class="my-4">Understand the Symptoms</h1>
+                        <p>yellow_fingers:  It occurs due to narrowed airways and mucus buildup.</p>
+                        <p>Peer Pressure: Peer pressure in lung cancer refers to social influences that encourage risky behaviors like smoking, increasing the risk of developing the disease..</p>
+                        <p>Chronic disease: Chronic disease in lung cancer refers to its long-term nature, requiring ongoing management and often leading to persistent symptoms and complications.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="d-block w-100 bg-dark" style="height: 300px;"></div>
+                    <div class="carousel-caption d-none d-md-block bg-dark text-light" style="padding-top: 0;">
+                        <h1 style="margin-top: 0;" class="my-4">Understand the Symptoms</h1>
+                        <p>Fatigue :Fatigue in lung cancer is a common symptom characterized by extreme tiredness that doesn't improve with rest. It can result from the disease itself, treatment side effects, or a combination of both.</p>
+                        <p>Wheezing : 
+                            Wheezing in lung cancer is a high-pitched whistling sound during breathing, often caused by airway obstruction or inflammation. It can indicate the presence of tumors or fluid in the lungs affecting airflow.</p>
+                        <p></p>
+                    </div>
+         
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+   
+    <div>
+        <form action="{% url 'lungCancerPrediction' %}" method="GET" id="">
+            {% csrf_token %}
+
+            <div class="form-row my-5">
+                <div class="col">
+                    <label><b>GENDER</b></label><br>
+                    <select id="" required>
+                    <option value="">--select the type--</option>
+                    <option value="male" name="gender">Male</option>
+                    <option value="female" name="gender">Female</option>
+                </select>
+                </div>
+                <div class="col">
+                    <label><b>AGE</b></label><br>
+                    <input type="number" name="age" required>
+                </div>
+                <div class="col">
+                    <label><b>SMOKING</b></label><br>
+                    <select id="" required>
+                        <option value="">--select the type--</option>
+                        <option value="yes" name="smoking">YES</option>
+                        <option value="no" name="smoking">NO</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row my-5">
+                <div class="col">
+                    <label><b>YELLOW_FINGERS</b></label><br>
+                    <select id="" required>
+                        <option value="">--select the type--</option>
+                        <option value="yes" name="yellow_fingers">YES</option>
+                        <option value="no" name="yellow_fingers">NO</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label><b>ANXIETY</b></label><br>
+                    <select id="" required>
+                        <option value="">--select the type--</option>
+                        <option value="yes" name="anxiety">YES</option>
+                        <option value="no" name="anxiety">NO</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label><b>PEER_PRESSURE</b></label> <br>
+                    <select id="" required>
+                        <option value="">--select the typee--</option>
+                        <option value="yes" name="peer_pressure">YES</option>
+                        <option value="no" name="peer_pressure">NO</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row my-5">
+                <div class="col">
+                    <label><b>CHRONIC DISEASE</b></label><br>
+                    <select id="" required>
+                        <option value="">--select the type--</option>
+                        <option value="yes" name="chronic_disease">YES</option>
+                        <option value="no" name="chronic_disease">NO</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label><b>FATIGUE</b></label><br>
+                    <select id="" required>
+                        <option value="">--select the type--</option>
+                        <option value="yes" name="fatigue">YES</option>
+                        <option value="no" name="fatigue">NO</option>
+                    </select>
+                 </div>
+                 <div class="col">
+                    <label><b>ALLERGY</b></label> <br>
+                    <select id="" required>
+                        <option value="">--select the typee--</option>
+                        <option value="yes" name="allergy">YES</option>
+                        <option value="no" name="allergy">NO</option>
+                    </select>
+                </div>
+             </div>
+            
+
+             <div class="form-row my-5">
+                <div class="col">
+                    <label><b>WHEEZING</b></label><br>
+                    <select id="" required>
+                        <option value="">--select the type--</option>
+                        <option value="yes" name="wheezing">YES</option>
+                        <option value="no" name="wheezing">NO</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label><b>ALCOHOL CONSUMING</b></label><br>
+                    <select id="" required>
+                        <option value="">--select the type--</option>
+                        <option value="yes" name="alcohol_consuming">YES</option>
+                        <option value="no" name="alcohol_consuming">NO</option>
+                    </select>
+                 </div>
+                 <div class="col">
+                    <label><b>COUGHING</b></label> <br>
+                    <select id="" required>
+                        <option value="">--select the typee--</option>
+                        <option value="yes" name="coughing">YES</option>
+                        <option value="no" name="coughing">NO</option>
+                    </select>
+                </div>
+             </div>
+
+             <div class="form-row my-5">
+                <div class="col">
+                    <label><b>SHORTNESS OF BREATH</b></label><br>
+                    <select id="" required>
+                        <option value="">--select the type--</option>
+                        <option value="yes" name="shortness_of_breath">YES</option>
+                        <option value="no" name="shortness_of_breath">NO</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label><b>SWALLOWING DIFFICULTY</b></label><br>
+                    <select id="" required>
+                        <option value="">--select the type--</option>
+                        <option value="yes" name="swallowing_difficulty">YES</option>
+                        <option value="no" name="swallowing_difficulty">NO</option>
+                    </select>
+                 </div>
+                 <div class="col">
+                    <label><b>CHEST PAIN</b></label> <br>
+                    <select id="" required>
+                        <option value="">--select the typee--</option>
+                        <option value="yes" name="chest_pain">YES</option>
+                        <option value="no" name="chest_pain">NO</option>
+                    </select>
+                </div>
+             </div>
+
+
+            <button type="submit" class="btn btn-primary col-md-12">Predict Lung Cancer</button>
+        </form>
+    </div>
+
+    <div class="text-muted text-center my-5">
+
+    
+    </div>
+
+</div>
+
+{% endblock body %}

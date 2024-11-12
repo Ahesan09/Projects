@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block title %}Diabetes Disorder{% endblock title %}
+
+{% block body %}
+
+<div class="container">
+
+        <h1 class="text-center">Diabetes Prediction</h1>
+    {% if outcome %}
+        <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-danger rounded box-shadow">
+            <div class="lh-100 my-2">
+                <h5 class="mb-0 text-white lh-100">Your prediction report: <b> {{ outcome }} </b></h5>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="my-3">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="d-block w-100 bg-dark" style="height: 300px;"></div>
+                    <div class="carousel-caption d-none d-md-block bg-dark text-light" style="padding-top: 0;">
+                        <h1 style="margin-top: 0;" class="my-4">Understand the Symptoms</h1>
+                        <p>Pregnancies: refers to the number of pregnancies a person has had..</p>
+                        <p>Glucose: It's a key indicator of diabetes as high blood sugar levels are a common symptom.</p>
+                        <p>BloodPressure: High blood pressure is often associated with diabetes..</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="d-block w-100 bg-dark" style="height: 300px;"></div>
+                    <div class="carousel-caption d-none d-md-block bg-dark text-light" style="padding-top: 0;">
+                        <h1 style="margin-top: 0;" class="my-4">Understand the Symptoms</h1>
+                        <p>SkinThickness: Skin thickness can be an indicator of insulin resistance, a common factor in diabetes.</p>
+                        <p>Insulin: Abnormal insulin levels can be a sign of diabetes.</p>
+                        <p>BMI :  A high BMI is often associated with increased risk of diabetes.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="d-block w-100 bg-dark" style="height: 300px;"></div>
+                    <div class="carousel-caption d-none d-md-block bg-dark text-light" style="padding-top: 0;">
+                        <h1 style="margin-top: 0;" class="my-4">Understand the Symptoms</h1>
+                        <p>DiabetesPedigree: Having a family member with diabetes can increase your risk of developing the condition.</p>
+                        <p>Age:  The risk of developing diabetes increases with age.</p>
+                       <p> </p>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+
+    <div>
+        <form action="{% url 'Diabetes_prediction' %}" method='method="GET"' id="">
+            {% csrf_token %}
+
+            <div class="form-row my-5">
+                <div class="col">
+                    <label><b>Pregnancies</b></label><br>
+                    <input type="number" name="Pregnancies" required>
+                </div>
+                <div class="col">
+                    <label><b>Glucose</b></label><br>
+                    <input type="number" name="Glucose" required>
+                </div>
+                <div class="col">
+                    <label><b>BloodPressure</b></label><br>
+                    <input type="number" name="BloodPressure" required>
+                </div>
+            </div>
+
+            <div class="form-row my-5">
+                <div class="col">
+                    <label><b>SkinThickness</b></label><br>
+                    <input type="number" name="SkinThickness" required>
+                </div>
+                <div class="col">
+                    <label><b>Insulin</b></label><br>
+                    <input type="number" name="Insulin" required>
+                </div>
+                <div class="col">
+                    <label><b>Bmi</b></label> <br>
+                    <input type="number" min="0" value="0" step="any" name="Bmi" required>
+                </div>
+            </div>
+
+            <div class="form-row my-5">
+                <div class="col">
+                    <label><b>DiabetesPedigree</b></label><br>
+                    <input type="number" min="0" value="0" step="any" name="DiabetesPedigreeFunction" required>
+                </div>
+                <div class="col">
+                    <label><b>Age</b></label><br>
+                    <input type="number" min="0" value="0" step="any" name="Age" required>
+                 </div>
+                <div class='col'>
+                
+                </div>
+             </div>
+            
+
+
+             <button type="submit" class="btn btn-primary col-md-12">Predict Diabetesr</button>
+        </form>
+    </div>
+
+    <div class="text-muted text-center my-5">
+
+    
+    </div>
+
+</div>
+
+{% endblock body %}

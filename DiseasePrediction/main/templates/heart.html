@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+
+{% block title %}Heart Disease{% endblock title %}
+
+{% block body %}
+
+<div class="container">
+
+        <h1 class="text-center">Heart Disease prediction</h1>
+    {% if outcome %}
+        <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-danger rounded box-shadow">
+            <div class="lh-100 my-2">
+                <h5 class="mb-0 text-white lh-100">Your prediction report: <b> {{ outcome }} </b></h5>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="my-3">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="d-block w-100 bg-dark" style="height: 300px;"></div>
+                    <div class="carousel-caption d-none d-md-block bg-dark text-light" style="padding-top: 0;">
+                        <h1 style="margin-top: 0;" class="my-4">Understand the Symptoms</h1>
+                        <p>cp: CP means chest pain in heart disease refers to four types: typical angina, atypical angina, non-anginal pain, and asymptomatic, indicating heart issue severity.
+                        </p>
+                        <p>Trestbps: Trestbps is the resting blood pressure and is a key indicator of heart disease risk.</p>
+                        <p>chol: chol refers to serum cholesterol levels. High cholesterol is a major risk factor for heart disease, as it can lead to plaque buildup in arteries.
+                        </p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="d-block w-100 bg-dark" style="height: 300px;"></div>
+                    <div class="carousel-caption d-none d-md-block bg-dark text-light" style="padding-top: 0;">
+                        <h1 style="margin-top: 0;" class="my-4">Understand the Symptoms</h1>
+                        <p>fbs:  stands for fasting blood sugar, measuring glucose levels after fasting to assess diabetes risk, which is linked to heart disease.</p>
+                        <p>restecg: measures the heart's electrical activity at rest to identify abnormalities.</p>
+                        <p>thalach:  refers to the maximum heart rate achieved during exercise testing, reflecting the heart's ability to respond to stress and assess cardiovascular health..</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="d-block w-100 bg-dark" style="height: 300px;"></div>
+                    <div class="carousel-caption d-none d-md-block bg-dark text-light" style="padding-top: 0;">
+                        <h1 style="margin-top: 0;" class="my-4">Understand the Symptoms</h1>
+                        <p>exang:  indicates exercise angina, showing if a patient experiences chest pain during physical activity, which helps assess coronary artery disease severity..</p>
+                        <p>Oldpeak :indicates ST segment depression, reflecting ischemia and heart disease severity.</p>
+                       <p>slope: indicates the ST segment slope during exercise testing, helping assess the heart's response and ischemia. </p>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <div class="d-block w-100 bg-dark" style="height: 300px;"></div>
+                    <div class="carousel-caption d-none d-md-block bg-dark text-light" style="padding-top: 0;">
+                        <h1 style="margin-top: 0;" class="my-4">Understand the Symptoms</h1>
+                        <p>ca: ca refers to the number of major vessels (0-3) colored by fluoroscopy. It helps evaluate the extent of coronary artery disease.</p>
+                        <p>thal : thal refers to the thalassemia, indicating the type of blood flow to the heart during a stress test. It helps assess the presence of heart disease.</p>
+                       <p> 
+                            
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+
+    <div>
+        <form action="{% url 'heartDiseasePrediction' %}" method='method="GET"' id="">
+            {% csrf_token %}
+
+            <div class="form-row my-5">
+                <div class="col">
+                    <label><b>Age</b></label><br>
+                    <input type="number" name="age" required>
+                </div>
+                <div class="col">
+                    <label><b>Sex</b></label><br>
+                    <select id="" required>
+                        <option value="">--select the type--</option>
+                        <option value="yes" name="sex">Male</option>
+                        <option value="no" name="sex">Female</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label><b>CP</b></label><br>
+                    <input type="number" name="cp" required>
+                </div>
+            </div>
+
+            <div class="form-row my-5">
+                <div class="col">
+                    <label><b>TrestBps</b></label><br>
+                    <input type="number" name="trestbps" required>
+                </div>
+                <div class="col">
+                    <label><b>Cholesterol</b></label><br>
+                    <input type="number" name="chol" required>
+                </div>
+                <div class="col">
+                    <label><b>fbs</b></label> <br>
+                    <select id="" required>
+                        <option value="">--select the type--</option>
+                        <option value="yes" name="fbs">YES</option>
+                        <option value="no" name="fbs">NO</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row my-5">
+                <div class="col">
+                    <label><b>RestECG</b></label><br>
+                    <input type="number" name="restecg" required>
+                </div>
+                <div class="col">
+                    <label><b>Thalach</b></label><br>
+                    <input type="number" name="thalach" required>
+                 </div>
+                <div class='col'>
+                    <label><b>Exang</b></label><br>
+                    <select id="" required>
+                        <option value="">--select the type--</option>
+                        <option value="yes" name="exang">YES</option>
+                        <option value="no" name="exang">NO</option>
+                    </select>
+                </div>
+             </div>
+            
+
+
+             <div class="form-row my-5">
+                <div class="col">
+                    <label><b>OldPeak</b></label><br>
+                    <input type="number" name="oldpeak" required>
+                </div>
+                <div class="col">
+                    <label><b>Slope</b></label><br>
+                    <input type="number" name="slope" required>
+                 </div>
+                <div class='col'>
+                    <label><b>CA</b></label><br>
+                    <input type="number" name="ca" required>
+                </div>
+             </div>
+
+
+             <div class="form-row my-5">
+                <div class="col">
+                    <label><b>Thal</b></label><br>
+                    <input type="number" name="thal" required>
+                </div>
+                <div class="col">
+                   
+                 </div>
+                <div class='col'>
+                    
+                </div>
+             </div>
+
+             <button type="submit" class="btn btn-primary col-md-12">Predict Diabetesr</button>
+        </form>
+    </div>
+
+    <div class="text-muted text-center my-5">
+
+    
+    </div>
+
+</div>
+
+{% endblock body %}
